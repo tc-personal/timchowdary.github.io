@@ -61,6 +61,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+// Email display function
+function showEmail() {
+    const emailDisplay = document.getElementById('emailDisplay');
+    const emailBtn = document.getElementById('emailBtn');
+    
+    if (emailDisplay.style.display === 'none') {
+        emailDisplay.style.display = 'block';
+        emailBtn.innerHTML = '<span>📧</span> Hide Email';
+    } else {
+        emailDisplay.style.display = 'none';
+        emailBtn.innerHTML = '<span>📧</span> Email';
+    }
+}
+
 // Console message for visitors
 console.log('%c👋 Hey there!', 'font-size: 20px; font-weight: bold; color: #2563eb;');
 console.log('%cInterested in how this site was built? Check out the source code!', 'font-size: 14px; color: #6b7280;');

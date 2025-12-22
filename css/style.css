@@ -293,6 +293,10 @@ body {
     box-shadow: var(--shadow);
     transition: all 0.3s;
     font-weight: 600;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    font-family: inherit;
 }
 
 .contact-btn:hover {
