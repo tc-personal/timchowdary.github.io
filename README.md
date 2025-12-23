@@ -63,7 +63,48 @@ Place your images in the `images/` folder:
 
 ### 4. Test Locally
 
-Simply open `index.html` in your web browser to preview your site locally.
+**🎯 Recommended: Use the Local Test Server**
+
+Run this command to start a local development server:
+```bash
+./start-server.sh
+```
+
+Then open your browser and go to: `http://localhost:8000`
+
+This allows you to test your changes properly before deploying to GitHub Pages.
+
+**📖 For detailed testing instructions, see [TESTING.md](TESTING.md)**
+
+**Alternative:** Simply open `index.html` in your web browser (limited functionality).
+
+## 🧪 Development Workflow (Edit → Test → Deploy)
+
+### Complete Workflow:
+
+1. **Edit your files** (`index.html`, `css/style.css`, `js/script.js`)
+
+2. **Test locally** before pushing:
+   ```bash
+   ./start-server.sh
+   # Open http://localhost:8000 in your browser
+   # Test all functionality
+   # Press Ctrl+C to stop server
+   ```
+
+3. **Deploy to GitHub** when everything works:
+   ```bash
+   git add .
+   git commit -m "Your descriptive message"
+   git push origin main
+   ```
+
+4. **Verify live site** (wait 1-2 minutes for GitHub Pages):
+   Visit: `https://tc-personal.github.io/timchowdary.github.io/`
+
+📖 **See [TESTING.md](TESTING.md) for detailed testing guide and troubleshooting**
+
+---
 
 ## 📤 Deploy to GitHub Pages
 
