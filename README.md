@@ -4,7 +4,7 @@ A modern, responsive portfolio website built with vanilla HTML, CSS, and JavaScr
 
 ## 🌐 Live Website
 
-This site will be available at: `https://tc-personal.github.io/professional-website/`
+This site will be available at: https://tc-personal.github.io/timchowdary.github.io/
 
 (Or `https://yourusername.github.io` if deployed to a user/organization pages repository)
 
