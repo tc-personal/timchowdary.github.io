@@ -8,30 +8,37 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="container">
-            <div class="nav-brand">Tim Chowdary</div>
-            <ul class="nav-menu">
-                <li><a href="#about">About</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </div>
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar">
+        <ul class="sidebar-menu">
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <h1>Welcome to My Portfolio</h1>
-            <p class="tagline"> Thought Leadership | AI Automations | Multi Cloud Expert</p>
-            <div class="cta-buttons">
-                <a href="#projects" class="btn btn-primary">View Projects</a>
-                <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <!-- Main Content Wrapper -->
+    <div class="main-content">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h1>Tim Chowdary</h1>
+                <p class="tagline-subtitle">Welcome to My Portfolio</p>
+                <p class="tagline">Thought Leadership | AI Automations | Multi Cloud Expert</p>
+                <div class="cta-buttons">
+                    <a href="#projects" class="btn btn-secondary">View Projects</a>
+                    <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
     <!-- About Section -->
     <section id="about" class="section">
@@ -183,12 +190,13 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 Tim Chowdary. All rights reserved.</p>
-        </div>
-    </footer>
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <p>&copy; 2025 Tim Chowdary. All rights reserved.</p>
+            </div>
+        </footer>
+    </div><!-- End Main Content -->
 
     <script src="js/script.js"></script>
 </body>

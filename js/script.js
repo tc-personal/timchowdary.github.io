@@ -1,5 +1,24 @@
 // Professional Portfolio JavaScript
 
+// Mobile menu toggle
+const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+const sidebar = document.querySelector('.sidebar');
+
+if (mobileMenuToggle && sidebar) {
+    mobileMenuToggle.addEventListener('click', () => {
+        sidebar.classList.toggle('active');
+    });
+    
+    // Close sidebar when clicking on a link (mobile)
+    document.querySelectorAll('.sidebar-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth <= 768) {
+                sidebar.classList.remove('active');
+            }
+        });
+    });
+}
+
 // Smooth scroll for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -14,7 +33,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Add active class to nav links on scroll
+// Add active class to sidebar links on scroll
 window.addEventListener('scroll', () => {
     let current = '';
     const sections = document.querySelectorAll('.section');
@@ -27,7 +46,7 @@ window.addEventListener('scroll', () => {
         }
     });
 
-    document.querySelectorAll('.nav-menu a').forEach(link => {
+    document.querySelectorAll('.sidebar-menu a').forEach(link => {
         link.classList.remove('active');
         if (link.getAttribute('href') === `#${current}`) {
             link.classList.add('active');
