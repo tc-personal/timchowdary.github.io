@@ -36,7 +36,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // Add active class to sidebar links on scroll
 window.addEventListener('scroll', () => {
     let current = '';
-    const sections = document.querySelectorAll('.section');
+    const sections = document.querySelectorAll('.hero, .section');
     
     sections.forEach(section => {
         const sectionTop = section.offsetTop;
