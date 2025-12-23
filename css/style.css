@@ -274,6 +274,22 @@ body {
     background-color: var(--bg-alt);
 }
 
+/* Dynamic sections with fade-in animation */
+.dynamic-section {
+    animation: fadeIn 0.4s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .section-title {
     text-align: center;
     font-size: 2.5rem;
@@ -282,6 +298,10 @@ body {
 }
 
 /* About Section */
+#about {
+    animation: fadeIn 0.4s ease-in;
+}
+
 .about-content {
     max-width: 1200px;
     margin: 0;

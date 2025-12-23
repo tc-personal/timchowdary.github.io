@@ -1,5 +1,50 @@
 // Professional Portfolio JavaScript
 
+// Dynamic Section Switching
+document.addEventListener('DOMContentLoaded', () => {
+    const aboutSection = document.getElementById('about');
+    const dynamicSections = document.querySelectorAll('.dynamic-section');
+    const sidebarLinks = document.querySelectorAll('.sidebar-menu a');
+    
+    // Function to show a specific section
+    function showSection(sectionId) {
+        // If clicking Welcome or About, show About section and hide dynamic sections
+        if (sectionId === 'welcome' || sectionId === 'about') {
+            aboutSection.style.display = 'block';
+            dynamicSections.forEach(section => {
+                section.style.display = 'none';
+            });
+        } else {
+            // Hide About section and all dynamic sections first
+            aboutSection.style.display = 'none';
+            dynamicSections.forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            // Show the selected dynamic section
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.style.display = 'block';
+            }
+        }
+    }
+    
+    // Add click handlers to sidebar links
+    sidebarLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href').substring(1); // Remove the # from href
+            showSection(targetId);
+            
+            // Smooth scroll to top of content
+            document.getElementById(targetId === 'welcome' ? 'welcome' : targetId === 'about' ? 'about' : targetId).scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        });
+    });
+});
+
 // Mobile menu toggle
 const mobileMenuToggle = document.getElementById('mobileMenuToggle');
 const sidebar = document.querySelector('.sidebar');
@@ -19,8 +64,9 @@ if (mobileMenuToggle && sidebar) {
     });
 }
 
-// Smooth scroll for navigation links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+// Smooth scroll for navigation links (handled by dynamic section switching above)
+// Keeping this for any other internal links that may be added
+document.querySelectorAll('a[href^="#"]:not(.sidebar-menu a)').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
@@ -33,16 +79,19 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Add active class to sidebar links on scroll
+// Add active class to sidebar links on scroll (only for visible sections)
 window.addEventListener('scroll', () => {
     let current = '';
     const sections = document.querySelectorAll('.hero, .section');
     
     sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        if (pageYOffset >= (sectionTop - 200)) {
-            current = section.getAttribute('id');
+        // Only consider visible sections
+        if (section.style.display !== 'none') {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (pageYOffset >= (sectionTop - 200)) {
+                current = section.getAttribute('id');
+            }
         }
     });
 
