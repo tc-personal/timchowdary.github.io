@@ -394,6 +394,114 @@ body {
     margin-bottom: 0;
 }
 
+/* Professional Experience Section */
+.experience-content {
+    max-width: 1200px;
+    margin: 0;
+    text-align: left;
+}
+
+.experience-item {
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background-color: var(--bg-color);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+}
+
+.experience-item:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+.experience-item.condensed {
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.company-name {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.experience-item.condensed .company-name {
+    font-size: 1.5rem;
+}
+
+.job-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+}
+
+.experience-item.condensed .job-title {
+    font-size: 1.125rem;
+}
+
+.job-location-date {
+    font-size: 1rem;
+    color: var(--text-light);
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+.job-summary {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: var(--text-light);
+    margin-bottom: 1.25rem;
+    font-weight: 500;
+}
+
+.experience-item.condensed .job-summary {
+    margin-bottom: 0;
+}
+
+.job-highlights {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.job-highlights li {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--text-light);
+    margin-bottom: 0.75rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.job-highlights li:before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.job-highlights li:last-child {
+    margin-bottom: 0;
+}
+
+.experience-section-divider {
+    margin: 3rem 0 2rem 0;
+    text-align: center;
+}
+
+.section-heading {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-color);
+    display: inline-block;
+    padding-bottom: 0.5rem;
+    border-bottom: 3px solid var(--primary-color);
+}
+
 /* Thought Leadership Section */
 .thought-leadership-nav {
     display: flex;
