@@ -319,11 +319,19 @@
     <section id="projects" class="section section-alt dynamic-section" style="display: none;">
         <div class="container">
             <h2 class="section-title">Featured Projects</h2>
-            <div class="projects-grid">
-                <!-- Project 1 -->
-                <div class="project-card">
-                    <h3>Elite Hire - AI Hiring Workflow</h3>
-                    <p>
+            
+            <!-- Project Selection Buttons -->
+            <div class="projects-nav">
+                <button class="project-nav-btn active" data-project="elite-hire">Elite Hire</button>
+                <button class="project-nav-btn" data-project="scopilot">Scopilot</button>
+                <button class="project-nav-btn" data-project="seller-intelligence">Amazon Seller Intelligence</button>
+            </div>
+            
+            <!-- Elite Hire Content -->
+            <div id="elite-hire-content" class="project-content active">
+                <div class="project-details">
+                    <h3 class="project-title">Elite Hire - AI Hiring Workflow</h3>
+                    <p class="project-description">
                         Comprehensive recruitment automation suite powered by Databricks Foundation Models.
                         Includes resume screening, scheduling, and email automation.
                     </p>
@@ -335,11 +343,13 @@
                     </div>
                     <a href="https://github.com/tc-personal/hiring-ai-workflow" class="project-link" target="_blank">View on GitHub →</a>
                 </div>
-
-                <!-- Project 2 - Add your own -->
-                <div class="project-card">
-                    <h3>Scopilot</h3>
-                    <p>
+            </div>
+            
+            <!-- Scopilot Content -->
+            <div id="scopilot-content" class="project-content">
+                <div class="project-details">
+                    <h3 class="project-title">Scopilot</h3>
+                    <p class="project-description">
                         Scopilot in an LLM based Scoping Agent that helps in the initial scoping of any migration project. Assessing code complexity, data volume, and other factors to help in the initial scoping of any migration project.
                     </p>
                     <div class="tech-stack">
@@ -349,11 +359,13 @@
                     </div>
                     <a href="#" class="project-link">View Project →</a>
                 </div>
-
-                <!-- Project 3 - Add your own -->
-                <div class="project-card">
-                    <h3>Amazon Seller Intelligence</h3>
-                    <p>
+            </div>
+            
+            <!-- Amazon Seller Intelligence Content -->
+            <div id="seller-intelligence-content" class="project-content">
+                <div class="project-details">
+                    <h3 class="project-title">Amazon Seller Intelligence</h3>
+                    <p class="project-description">
                         Seller Intelligence is comprehensive data lake that processes and analyzes data from Amazon Seller Central to provide insights and intelligence for Amazon sellers.
                     </p>
                     <div class="tech-stack">

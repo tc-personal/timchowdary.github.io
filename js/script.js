@@ -242,6 +242,31 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+    
+    // Projects switching
+    const projectNavBtns = document.querySelectorAll('.project-nav-btn');
+    const projectContents = document.querySelectorAll('.project-content');
+    
+    projectNavBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const project = this.getAttribute('data-project');
+            
+            // Remove active class from all buttons
+            projectNavBtns.forEach(b => b.classList.remove('active'));
+            
+            // Add active class to clicked button
+            this.classList.add('active');
+            
+            // Hide all project contents
+            projectContents.forEach(content => content.classList.remove('active'));
+            
+            // Show selected project content
+            const targetContent = document.getElementById(`${project}-content`);
+            if (targetContent) {
+                targetContent.classList.add('active');
+            }
+        });
+    });
 });
 
 // Console message for visitors
