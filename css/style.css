@@ -1146,6 +1146,8 @@ body {
 /* Operating Principles */
 .principle-item {
     display: flex;
+    flex-direction: row;
+    align-items: flex-start;
     gap: 1.5rem;
     margin-bottom: 2.5rem;
     padding: 1.5rem;
@@ -1172,6 +1174,11 @@ body {
     justify-content: center;
     font-size: 1.5rem;
     font-weight: 700;
+}
+
+.principle-content {
+    flex: 1;
+    min-width: 0;
 }
 
 .principle-content h5 {
