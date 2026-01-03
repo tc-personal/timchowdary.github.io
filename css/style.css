@@ -1276,6 +1276,65 @@ body {
     font-weight: bold;
 }
 
+/* Gallery Section */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.gallery-item {
+    background: var(--bg-color);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+}
+
+.gallery-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.gallery-image-wrapper {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    background: var(--bg-alt);
+}
+
+.gallery-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover .gallery-image {
+    transform: scale(1.05);
+}
+
+.gallery-caption {
+    padding: 1.5rem;
+    background: var(--bg-color);
+}
+
+.gallery-title {
+    font-size: 1.1rem;
+    color: var(--text-color);
+    margin: 0;
+    font-weight: 600;
+}
+
+.gallery-description {
+    font-size: 0.95rem;
+    color: var(--text-light);
+    margin-top: 0.5rem;
+    line-height: 1.5;
+}
+
 /* Contact Section */
 .contact-content {
     text-align: center;
@@ -1431,6 +1490,12 @@ body {
     .contact-btn {
         padding: 0.75rem 1.25rem;
         font-size: 0.9rem;
+    }
+    
+    /* Gallery responsive */
+    .gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
     
     /* DNA two-column responsive */
