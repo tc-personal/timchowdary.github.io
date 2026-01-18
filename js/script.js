@@ -371,8 +371,16 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Get page
         viewer.pdfDoc.getPage(pageNum).then((page) => {
-            // Set scale for better quality
-            const scale = 1.5;
+            // Determine scale based on container width for responsive rendering
+            const container = viewer.canvas.parentElement;
+            const containerWidth = container ? container.clientWidth : 800;
+            
+            // Get the page viewport at scale 1 to get natural dimensions
+            const viewport1 = page.getViewport({ scale: 1 });
+            
+            // Calculate scale to fit container width (with some padding)
+            const scale = Math.min((containerWidth - 40) / viewport1.width, 1.2);
+            
             const viewport = page.getViewport({ scale: scale });
             
             // Set canvas dimensions
