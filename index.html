@@ -614,22 +614,23 @@
                 <!-- Frameworks Sub-Navigation -->
                 <div class="frameworks-sub-nav">
                     <button class="frameworks-sub-btn active" data-subtopic="introduction">Introduction</button>
+                    <button class="frameworks-sub-btn" data-subtopic="scamper">SCAMPER</button>
                 </div>
                 
                 <!-- Introduction Sub-Content -->
                 <div id="introduction-subcontent" class="frameworks-sub-content active">
                     <div class="pdf-viewer-container">
                         <div class="pdf-controls">
-                            <button id="prev-page" class="pdf-nav-btn" disabled>
+                            <button id="prev-page-intro" class="pdf-nav-btn" disabled>
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <path d="M15 18l-6-6 6-6"/>
                                 </svg>
                                 Previous
                             </button>
                             <div class="pdf-page-info">
-                                <span id="page-num">1</span> / <span id="page-count">-</span>
+                                <span id="page-num-intro">1</span> / <span id="page-count-intro">-</span>
                             </div>
-                            <button id="next-page" class="pdf-nav-btn">
+                            <button id="next-page-intro" class="pdf-nav-btn">
                                 Next
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <path d="M9 18l6-6-6-6"/>
@@ -637,9 +638,39 @@
                             </button>
                         </div>
                         <div class="pdf-canvas-wrapper">
-                            <canvas id="pdf-canvas"></canvas>
+                            <canvas id="pdf-canvas-intro"></canvas>
                         </div>
-                        <div class="pdf-loading" id="pdf-loading">
+                        <div class="pdf-loading" id="pdf-loading-intro">
+                            <div class="spinner"></div>
+                            <p>Loading PDF...</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- SCAMPER Sub-Content -->
+                <div id="scamper-subcontent" class="frameworks-sub-content">
+                    <div class="pdf-viewer-container">
+                        <div class="pdf-controls">
+                            <button id="prev-page-scamper" class="pdf-nav-btn" disabled>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M15 18l-6-6 6-6"/>
+                                </svg>
+                                Previous
+                            </button>
+                            <div class="pdf-page-info">
+                                <span id="page-num-scamper">1</span> / <span id="page-count-scamper">-</span>
+                            </div>
+                            <button id="next-page-scamper" class="pdf-nav-btn">
+                                Next
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M9 18l6-6-6-6"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="pdf-canvas-wrapper">
+                            <canvas id="pdf-canvas-scamper"></canvas>
+                        </div>
+                        <div class="pdf-loading" id="pdf-loading-scamper">
                             <div class="spinner"></div>
                             <p>Loading PDF...</p>
                         </div>

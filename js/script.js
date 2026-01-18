@@ -240,9 +240,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (targetContent) {
                 targetContent.classList.add('active');
                 
-                // Initialize PDF viewer if Frameworks topic is selected
+                // Initialize Introduction PDF viewer if Frameworks topic is selected
                 if (topic === 'frameworks') {
-                    initPDFViewer();
+                    initPDFViewer('intro', 'Thought Leadership/Mental_Models_vs_Frameworks.pdf');
                 }
             }
         });
@@ -270,128 +270,156 @@ document.addEventListener('DOMContentLoaded', () => {
             if (targetContent) {
                 targetContent.classList.add('active');
                 
-                // Initialize PDF viewer if Introduction is selected
+                // Initialize PDF viewer based on selected subtopic
                 if (subtopic === 'introduction') {
-                    initPDFViewer();
+                    initPDFViewer('intro', 'Thought Leadership/Mental_Models_vs_Frameworks.pdf');
+                } else if (subtopic === 'scamper') {
+                    initPDFViewer('scamper', 'Thought Leadership/SCAMPER_Creative_Problem_Solving_Framework.pdf');
                 }
             }
         });
     });
     
-    // PDF Viewer functionality
-    let pdfDoc = null;
-    let pageNum = 1;
-    let pageIsRendering = false;
-    let pageNumIsPending = null;
+    // PDF Viewer functionality - supporting multiple viewers
+    const pdfViewers = {};
     
-    const canvas = document.getElementById('pdf-canvas');
-    const ctx = canvas ? canvas.getContext('2d') : null;
-    const prevBtn = document.getElementById('prev-page');
-    const nextBtn = document.getElementById('next-page');
-    const pageNumElem = document.getElementById('page-num');
-    const pageCountElem = document.getElementById('page-count');
-    const pdfLoading = document.getElementById('pdf-loading');
-    
-    function initPDFViewer() {
-        if (!pdfDoc && typeof pdfjsLib !== 'undefined' && canvas) {
-            // Set worker source
+    function initPDFViewer(viewerId, pdfPath) {
+        // Set worker source if not already set
+        if (typeof pdfjsLib !== 'undefined' && !pdfjsLib.GlobalWorkerOptions.workerSrc) {
             pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-            
-            // Load PDF
-            const pdfPath = 'Thought Leadership/Mental_Models_vs_Frameworks.pdf';
-            
-            pdfjsLib.getDocument(pdfPath).promise.then((pdfDoc_) => {
-                pdfDoc = pdfDoc_;
-                pageCountElem.textContent = pdfDoc.numPages;
-                
-                // Hide loading indicator
-                if (pdfLoading) {
-                    pdfLoading.classList.add('hidden');
-                }
-                
-                // Render first page
-                renderPage(pageNum);
-                
-                // Setup navigation buttons
-                if (prevBtn) {
-                    prevBtn.addEventListener('click', () => {
-                        if (pageNum <= 1) return;
-                        pageNum--;
-                        queueRenderPage(pageNum);
-                    });
-                }
-                
-                if (nextBtn) {
-                    nextBtn.addEventListener('click', () => {
-                        if (pageNum >= pdfDoc.numPages) return;
-                        pageNum++;
-                        queueRenderPage(pageNum);
-                    });
-                }
-            }).catch(err => {
-                console.error('Error loading PDF:', err);
-                if (pdfLoading) {
-                    pdfLoading.innerHTML = '<p style="color: red;">Error loading PDF. Please try again later.</p>';
-                }
-            });
-        } else if (pdfDoc) {
-            // PDF already loaded, just render current page
-            renderPage(pageNum);
         }
+        
+        // Get elements for this specific viewer
+        const canvas = document.getElementById(`pdf-canvas-${viewerId}`);
+        const ctx = canvas ? canvas.getContext('2d') : null;
+        const prevBtn = document.getElementById(`prev-page-${viewerId}`);
+        const nextBtn = document.getElementById(`next-page-${viewerId}`);
+        const pageNumElem = document.getElementById(`page-num-${viewerId}`);
+        const pageCountElem = document.getElementById(`page-count-${viewerId}`);
+        const pdfLoading = document.getElementById(`pdf-loading-${viewerId}`);
+        
+        if (!canvas || !ctx) return;
+        
+        // Check if this viewer is already initialized
+        if (pdfViewers[viewerId]) {
+            // Already loaded, just render current page
+            renderPage(viewerId);
+            return;
+        }
+        
+        // Initialize viewer object
+        pdfViewers[viewerId] = {
+            pdfDoc: null,
+            pageNum: 1,
+            pageIsRendering: false,
+            pageNumIsPending: null,
+            canvas: canvas,
+            ctx: ctx,
+            prevBtn: prevBtn,
+            nextBtn: nextBtn,
+            pageNumElem: pageNumElem,
+            pageCountElem: pageCountElem,
+            pdfLoading: pdfLoading
+        };
+        
+        // Load PDF
+        pdfjsLib.getDocument(pdfPath).promise.then((pdfDoc_) => {
+            pdfViewers[viewerId].pdfDoc = pdfDoc_;
+            pageCountElem.textContent = pdfDoc_.numPages;
+            
+            // Hide loading indicator
+            if (pdfLoading) {
+                pdfLoading.classList.add('hidden');
+            }
+            
+            // Render first page
+            renderPage(viewerId);
+            
+            // Setup navigation buttons
+            if (prevBtn) {
+                prevBtn.addEventListener('click', () => {
+                    const viewer = pdfViewers[viewerId];
+                    if (viewer.pageNum <= 1) return;
+                    viewer.pageNum--;
+                    queueRenderPage(viewerId, viewer.pageNum);
+                });
+            }
+            
+            if (nextBtn) {
+                nextBtn.addEventListener('click', () => {
+                    const viewer = pdfViewers[viewerId];
+                    if (viewer.pageNum >= viewer.pdfDoc.numPages) return;
+                    viewer.pageNum++;
+                    queueRenderPage(viewerId, viewer.pageNum);
+                });
+            }
+        }).catch(err => {
+            console.error('Error loading PDF:', err);
+            if (pdfLoading) {
+                pdfLoading.innerHTML = '<p style="color: red;">Error loading PDF. Please try again later.</p>';
+            }
+        });
     }
     
-    function renderPage(num) {
-        if (!pdfDoc || !canvas || !ctx) return;
+    function renderPage(viewerId, num) {
+        const viewer = pdfViewers[viewerId];
+        if (!viewer || !viewer.pdfDoc || !viewer.canvas || !viewer.ctx) return;
         
-        pageIsRendering = true;
+        // Use provided page number or current page number
+        const pageNum = num || viewer.pageNum;
+        viewer.pageIsRendering = true;
         
         // Get page
-        pdfDoc.getPage(num).then((page) => {
+        viewer.pdfDoc.getPage(pageNum).then((page) => {
             // Set scale for better quality
             const scale = 1.5;
             const viewport = page.getViewport({ scale: scale });
             
             // Set canvas dimensions
-            canvas.height = viewport.height;
-            canvas.width = viewport.width;
+            viewer.canvas.height = viewport.height;
+            viewer.canvas.width = viewport.width;
             
             // Render PDF page
             const renderCtx = {
-                canvasContext: ctx,
+                canvasContext: viewer.ctx,
                 viewport: viewport
             };
             
             const renderTask = page.render(renderCtx);
             
             renderTask.promise.then(() => {
-                pageIsRendering = false;
+                viewer.pageIsRendering = false;
                 
-                if (pageNumIsPending !== null) {
-                    renderPage(pageNumIsPending);
-                    pageNumIsPending = null;
+                if (viewer.pageNumIsPending !== null) {
+                    renderPage(viewerId, viewer.pageNumIsPending);
+                    viewer.pageNumIsPending = null;
                 }
             });
         });
         
         // Update page number
-        if (pageNumElem) {
-            pageNumElem.textContent = num;
+        if (viewer.pageNumElem) {
+            viewer.pageNumElem.textContent = pageNum;
         }
         
         // Update button states
-        if (prevBtn) {
-            prevBtn.disabled = (num <= 1);
+        if (viewer.prevBtn) {
+            viewer.prevBtn.disabled = (pageNum <= 1);
         }
-        if (nextBtn) {
-            nextBtn.disabled = (num >= pdfDoc.numPages);
+        if (viewer.nextBtn) {
+            viewer.nextBtn.disabled = (pageNum >= viewer.pdfDoc.numPages);
         }
     }
     
-    function queueRenderPage(num) {
-        if (pageIsRendering) {
-            pageNumIsPending = num;
+    function queueRenderPage(viewerId, num) {
+        const viewer = pdfViewers[viewerId];
+        if (!viewer) return;
+        
+        if (viewer.pageIsRendering) {
+            viewer.pageNumIsPending = num;
         } else {
-            renderPage(num);
+            viewer.pageNum = num;
+            renderPage(viewerId, num);
         }
     }
     
