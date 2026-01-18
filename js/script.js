@@ -248,6 +248,36 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
     
+    // Frameworks Sub-Navigation switching
+    const frameworksSubBtns = document.querySelectorAll('.frameworks-sub-btn');
+    const frameworksSubContents = document.querySelectorAll('.frameworks-sub-content');
+    
+    frameworksSubBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const subtopic = this.getAttribute('data-subtopic');
+            
+            // Remove active class from all sub-buttons
+            frameworksSubBtns.forEach(b => b.classList.remove('active'));
+            
+            // Add active class to clicked button
+            this.classList.add('active');
+            
+            // Hide all sub-contents
+            frameworksSubContents.forEach(content => content.classList.remove('active'));
+            
+            // Show selected sub-content
+            const targetContent = document.getElementById(`${subtopic}-subcontent`);
+            if (targetContent) {
+                targetContent.classList.add('active');
+                
+                // Initialize PDF viewer if Introduction is selected
+                if (subtopic === 'introduction') {
+                    initPDFViewer();
+                }
+            }
+        });
+    });
+    
     // PDF Viewer functionality
     let pdfDoc = null;
     let pageNum = 1;

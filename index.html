@@ -611,30 +611,38 @@
             <div id="frameworks-content" class="tl-topic-content">
                 <h3 class="tl-topic-title">Frameworks and Mental Models</h3>
                 
-                <div class="pdf-viewer-container">
-                    <div class="pdf-controls">
-                        <button id="prev-page" class="pdf-nav-btn" disabled>
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M15 18l-6-6 6-6"/>
-                            </svg>
-                            Previous
-                        </button>
-                        <div class="pdf-page-info">
-                            <span id="page-num">1</span> / <span id="page-count">-</span>
+                <!-- Frameworks Sub-Navigation -->
+                <div class="frameworks-sub-nav">
+                    <button class="frameworks-sub-btn active" data-subtopic="introduction">Introduction</button>
+                </div>
+                
+                <!-- Introduction Sub-Content -->
+                <div id="introduction-subcontent" class="frameworks-sub-content active">
+                    <div class="pdf-viewer-container">
+                        <div class="pdf-controls">
+                            <button id="prev-page" class="pdf-nav-btn" disabled>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M15 18l-6-6 6-6"/>
+                                </svg>
+                                Previous
+                            </button>
+                            <div class="pdf-page-info">
+                                <span id="page-num">1</span> / <span id="page-count">-</span>
+                            </div>
+                            <button id="next-page" class="pdf-nav-btn">
+                                Next
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M9 18l6-6-6-6"/>
+                                </svg>
+                            </button>
                         </div>
-                        <button id="next-page" class="pdf-nav-btn">
-                            Next
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M9 18l6-6-6-6"/>
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="pdf-canvas-wrapper">
-                        <canvas id="pdf-canvas"></canvas>
-                    </div>
-                    <div class="pdf-loading" id="pdf-loading">
-                        <div class="spinner"></div>
-                        <p>Loading PDF...</p>
+                        <div class="pdf-canvas-wrapper">
+                            <canvas id="pdf-canvas"></canvas>
+                        </div>
+                        <div class="pdf-loading" id="pdf-loading">
+                            <div class="spinner"></div>
+                            <p>Loading PDF...</p>
+                        </div>
                     </div>
                 </div>
             </div>
