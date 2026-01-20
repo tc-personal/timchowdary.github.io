@@ -1402,6 +1402,19 @@ body {
     color: var(--primary-color);
 }
 
+/* SCAMPER in a Nutshell Section */
+.scamper-nutshell-content {
+    padding: 1.5rem 0;
+}
+
+.nutshell-intro {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: var(--text-color);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
 /* Responsive Frameworks Content */
 @media (max-width: 768px) {
     .scamper-techniques-grid {
