@@ -1457,6 +1457,10 @@ body {
     margin-bottom: 0;
 }
 
+.execution-intro .final-emphasis strong.execution-quote {
+    color: #e67e22 !important;
+}
+
 .execution-section {
     margin-bottom: 3.5rem;
 }
